@@ -38,13 +38,7 @@
 </dependency>
 
 
-<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-<dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>1.18.34</version>
-    <scope>provided</scope>
-</dependency>
+
 
 <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 <dependency>
@@ -53,7 +47,11 @@
     <version>9.1.0</version>
 </dependency>
 
-		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
