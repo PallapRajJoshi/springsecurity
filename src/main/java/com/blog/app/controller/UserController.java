@@ -19,10 +19,10 @@ private UserService service;
 		return service.register(user);
 		
 	}
-	@PostMapping("/login")
+	@PostMapping("/logins")
 	public String login(@RequestBody User user) {
-		System.out.println(user);
-		return "Success";
+		
+		return service.verify(user);
 	}
 	
 	

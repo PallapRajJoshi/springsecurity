@@ -1,6 +1,9 @@
 package com.blog.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +13,8 @@ import com.blog.app.repo.UserRepo;
 public class UserService {
 	@Autowired
 	UserRepo repo;
-
+@Autowired
+AuthenticationManager authManager;
 	
 	public BCryptPasswordEncoder encoder=new BCryptPasswordEncoder(12);
 	public User register(User user) {
@@ -18,5 +22,15 @@ public class UserService {
 		return repo.save(user);
 	}
 	
+	
+	public String verify(User user) {
+		Authentication authentication=authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+		
+		if(authentication.isAuthenticated()) 
+			return "success";
+		return "fail";
+		
+		
+	}
 	
 }
