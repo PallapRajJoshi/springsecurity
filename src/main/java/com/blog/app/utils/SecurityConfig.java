@@ -18,8 +18,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.blog.app.services.MyUserDetailService;
+import com.blog.app.utils.JwtFilter.JwtFilter;
 
 import jakarta.annotation.security.PermitAll;
 
@@ -29,7 +31,8 @@ public class SecurityConfig {
 	@Autowired
 	private MyUserDetailService userDetailService;
 	
-	
+	@Autowired
+	private JwtFilter jwtFilter;
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -46,6 +49,8 @@ public class SecurityConfig {
 		httpBasic(Customizer.withDefaults()).
 		sessionManagement(session->
 		session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).
+		
+		addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class ).
 		build();
 //		for Access denied
 //		http.authorizeHttpRequests(request->request.anyRequest().authenticated());
