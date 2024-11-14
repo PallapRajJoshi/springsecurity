@@ -5,14 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Data
+
+
 @Entity
 @Table(name="users")
 public class User {
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
